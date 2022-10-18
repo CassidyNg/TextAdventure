@@ -144,10 +144,42 @@ public class TextAdventure
     // describe the area/situation to the user. 
     // Give them options for choices.
     // ADD CODE HERE
-
+    System.out.println("You appear before a dragon temple high in the mountains. \nMist surrounds it with the mountains seeming to protect it. \nYou approach the temple and as you get closer you notice how beautiful it is up close. \nYou hear a sudden screech behind you. \nturn - turn around and see what it was \n" + ourHero.getName() + ": ");
+    String input = inScanner.nextLine();
     // Take action or go to another zone based on their choice
     // ADD CODE HERE
-    
+    if(input.equals("turn")){
+      console.setImage("dragon.jpg");
+      System.out.println("A beautiful grey dragon flies down with a hard landing that crumbles part of the mountain. \nAlready? You pull out your " + ourHero.getWeapon() + " and steady your grip. \nHow do you attack? \nforward - dive straight and slash its chest \nhide - hide behind a nearby building \n" + ourHero.getName() + ": ");
+      input = inScanner.nextLine();
+      if(input.equals("forward")){
+        ourHero.setHealth(69);
+        System.out.println("You dive forward and attempt to slash what you hope is a weak spot but miss as the dragon swipes you away. \nYour health is now " + ourHero.getHealth() + ", suffering damage from the hit (dragons deal greater damage). \nWhere do you aim next? \nwings - slice the wings \nhorns - cut one of the horns \ntail - damage the tail \n" + ourHero.getName() + ": ");
+        input = inScanner.nextLine();
+        if(input.equals("wings") || input.equals("tail")){
+          ourHero.setHealth(43);
+          System.out.println("You charge forward and aim for its " + input + ", but the dragon hits you with its tail and damages you greatly. \nYour current health is " + ourHero.getHealth() + ". \nWhile trying to stabilize your footing the dragon releases a shrieking echo which shatters your ears. \nNow with the loss of hearing your state is greatly weakened. \nYour slapped down by its horns as it pushes the points deeper into your skin. \nWas it wrong too accept this quest?");
+          console.setImage("flyingdragon.jpg");
+          ourHero.setHealth(0);
+          System.out.println("The power of dragons are just too great...");
+          gameEnd();
+        }else{
+          ourHero.setHealth(73);
+          System.out.println("You push forward and aim for the horns. \nYou jump high up onto its back as it starts to thrash. \nYou struggle to maintain your balance as you aim for its horns. \nThe dragon notices and screeches as you attack. \nDamage is done to one and the dragon's flight seems to weaken. \nThe dragon flies until you lose your grip, not before you cut one horn off. \nIts horn bleeds black as it collapses against the mountain, destroying a house or two. \nYou march forward and hesitantly cut off its other horn with your " + ourHero.getWeapon() + ". \nc- continue \n" + ourHero.getName() + ": ");
+          input = inScanner.nextLine();
+          if(input.equals("c")){
+            System.out.println("The dragon begins to fade, its glowing eyes staring directly into yours sadly. \nYour body feels a surge of power through you as the remainders of the dragon's energy is transferred to you. \nCongrtaulations, you have gained ultimate power! \nBut... what made you hesitate?");
+            console.setImage("ultimatepower.webp");
+            ourHero.defeatMonster();
+            gameEnd();
+          }
+        }
+      }else{
+        System.out.println("You run an hide behind one of the buildings in fear of the dragon. \nIt begins to stomp and destroy the temple, leaving no remaining pieces. \nStil hiding you hope that the dragon doesn't discover you. \nBut the crumbling of the buildings and the mountain interrupt your thoughts as they fall above you... \nLooks like you'll never face the dragon.");
+        console.setImage("flyingdragon.jpg");
+        gameEnd();
+      }
+    }
   }
 
   private void enterZone6()
@@ -173,7 +205,7 @@ public class TextAdventure
     }else{
       ourHero.changeWeapon("ring");
     }
-    System.out.println("You choose the " + ourHero.getWeapon() + " to assist you on your quest and the women quickly sweeps the others away. \n\"You should get started right away\"\n The women drew a magic circle around you and transported you to a new location. \nc - press c to continue");
+    System.out.println("You choose the " + ourHero.getWeapon() + " to assist you on your quest and the women quickly sweeps the others away. \n\"You should get started right away\"\n The women drew a magic circle around you and transported you to a new location. \nc - continue \n" + ourHero.getName() + ": ");
     input = inScanner.nextLine();
     if(input.equals("c")){
       enterZone5();
@@ -224,7 +256,7 @@ public class TextAdventure
       ourHero.defeatMonster();
       ourHero.defeatMonster();
       ourHero.setGold(6);
-      System.out.println("Congratulations, you defeated " + ourHero.getMonstersDefeated() + " monsters and now have " + ourHero.getGold() + " gold coins. \nWhere would you like to go?");
+      System.out.println("Where would you like to go now?");
       System.out.println("left - back to the other path \nwander - wander around the forest until you find something \n" + ourHero.getName() + ": ");
       input = inScanner.nextLine();
       if(input.equals("left")){
@@ -263,16 +295,16 @@ public class TextAdventure
       System.out.println("whip - attempt to grab the whip with your other hand \nnothing - let yourself fall \n" + ourHero.getName() + ": ");
       input = inScanner.nextLine();
       if(input.equals("whip")){
-        System.out.println("You struggle to grab your whip out of your bag and finally feel its grip as you pull it out. \nAttempting to lasso onto something the ship rocks once again and you fall into the sea. \n c - continue");
+        System.out.println("You struggle to grab your whip out of your bag and finally feel its grip as you pull it out. \nAttempting to lasso onto something the ship rocks once again and you fall into the sea. \n c - continue \n" + ourHero.getName() + ": ");
         input = inScanner.nextLine();
         if(input.equals("c")){
-          console.setImage("drowning.png");
+          console.setImage("drowning.jpg");
           System.out.println("You plunge into the water, the stormy waves tossing you into and out of the water. \nThe weight you cannot get off you sinks you...");
           System.out.println("You have drowned in the sea of monsters. \nYou ended your journey with " + ourHero.getGold());
           gameEnd();
         }
       }else{
-        console.setImage("drowning.png");
+        console.setImage("drowning.jpg");
         System.out.println("With your death in sight you let yourself fall into the stormy sea. \nThe salt water fills your lungs and your eyelids become heavy... \nYou have ended your journey with " + ourHero.getGold());
         gameEnd();
       }
@@ -380,7 +412,7 @@ public class TextAdventure
       }
     }else{
       System.out.println("You attempt to scare the monster with a hiss, standing tall to appear bigge than you seem. \nUnphased the monster grabs you and throws you into the water. \nIt pushes you deeper and deeper into the water as you thrash against its grip. \nYou begin to gasp for air and choke on the water filling your lungs. \nScaring it...what a stupid idea...");
-      console.setImage("drowning.png");
+      console.setImage("drowning.jpg");
       gameEnd();
     }
     
@@ -394,10 +426,71 @@ public class TextAdventure
     // describe the area/situation to the user. 
     // Give them options for choices.
     // ADD CODE HERE
-
+    System.out.println("You follow the spiral staircase to the right, entering a long hallway. \nVines grow along the sides and the floor is covered in crumbled rock. \nAt the end of the hallway you enter a room that is now in ruins but once was very beautiful. \nImmeditaely the crystal globe in the center in the room catches your eye. \nYou start to approach it and gaze at it with curiosity. \nWhat do you do with it?");
+    System.out.println("break - accidentally knock it over \nsteal - take it for yourself \n" + ourHero.getName() + ": ");
+    String input = inScanner.nextLine();
     // Take action or go to another zone based on their choice
     // ADD CODE HERE
-    
+    if(input.equals("break")){
+      System.out.println("You accidentally break the crystal as you go over to get a closer look. \nYou fear what may happen to you as you don't know the consequences of breaking something in a temple.");
+      int input1 = (int)(Math.random() * 6) + 1;
+      if(input1 != 1 || input1 !=3){
+        System.out.println("You hear a rumble and the broken crystal begins to glow ever so brightly. \nThere's a flash of white light and you hear a crack as you're taken by the light.");
+        console.setImage("hauntedswamp.jpg");
+        System.out.println("You fall into a swamp and become covered with moss and lilly pads. \nThe noise stirs the spirits nearby and they gaze at you wickedly. \nWhat do you do? \nrun - attempt to scurry away \nfight - attack them with a nearby stick \n" + ourHero.getName() + ": ");
+        input = inScanner.nextLine();
+        if(input.equals("run")){
+          System.out.println("You try to run through the swamp as the spirits laugh and chase you. \nThey taunt and whisper to you as they catch up. \nYou sprint so hard that you end up toppling over from the misbalance. \nThe ghosts play with you and finally kill you...");
+          console.setImage("grimreaper.jpg");
+          gameEnd();
+        }else{
+          System.out.println("You quickly snatch the largest stick you could find up and begin to swipe at the ghosts. \nThe stick passes right through... dumb idea huh? \nThe spirits laugh in your ears before your soul is taken for themselves...");
+          console.setImage("grimreaper.jpg");
+          gameEnd();
+        }
+      }else{
+        System.out.println("The broken crystal pieces begin to glow and circle around you. \nThey glow so intensely that it blinds you and prevents you from seeing the chaos of the pieces. c-continue");
+        input = inScanner.nextLine();
+        if(input.equals("c")){
+          console.setImage("magiccircle.jpg");
+          System.out.println("They form a star around you and the room begins to darken around it. \nYou feel an overflowing sense of power surrounding you as the light grows brighter. \nIts strength begins to seep into your skin and your body feels an overwhelming presence. \nc - continue \n" + ourHero.getName() + ": ");
+          input = inScanner.nextLine();
+          if(input.equals("c")){
+            console.setImage("ultimatepower.webp");
+            System.out.println("You have obtained ultimate power... how fortunate...");
+          }
+        }
+      }
+    }else{ 
+      System.out.println("You swiftly snatch the crystal and tuck in into your bag. \nYou wait for a moment to see if anything happens. Silence. \nYou let out a sigh and make your way back to the center of the castle. \nAs you walk back you suddenly feel a rumbling beneath your feet and the floor crumbles beneath you. \nc - continue \n" + ourHero.getName() +": ");
+      input = inScanner.nextLine();
+      if(input.equals("c")){
+         console.setImage("deathgamble.jpg");
+         System.out.println("You rub your head and look around you in a panic. \nBefore you stands a mysterious person in a dark cloak who radiates a skin crawling energy. \n\"You have committed a grave sin, stealing a sacred object? How shameful...\" \nYou stand up quietly staring at the person. \n\"You're lucky... today is not a day for death. But if you cannot guess the symbolic number of our temple. You die.\" \nSymbolic number? You're confused by the question and are not sure what to think. \nThe figure asks you if you accept their offer for survival. \nAccept it? \nyes - accept \nno - dont' accept and die \n" + ourHero.getName() + ": ");
+         input = inScanner.nextLine();
+         if(input.equals("yes")){
+          int symbolicNumber = (int)(Math.random() * 26);
+          System.out.println("You accept their kind offer and think back to the temple \nWas there ever a hint of a number there? \nYou ask for a range with the response of 0 to 25. \nYou think hard but can't recall anything. \nWhat's your guess?\n" + ourHero.getName() + ": ");
+          int input1 = inScanner.nextInt();
+          if(input1 != 4){
+            System.out.println("\"Well?\" \nYou answer hesitantly, \"" + input1 + "?\" \nAlthough their face is covered you see a grin form. \n\"Wrong.\" \nIn an instant you heartbeat slows and your eyes become heavy... game over.");
+            console.setImage("grimreaper.jpg");
+            gameEnd();
+          }else{
+            System.out.println("The cloacked figure sighs sadly. \n\"Congratulations... you will not be our sacrifice\" the figure says in a flat voice. \nYou release a long sigh and large doors open to a glowing room. \nYou look at the figure confused. \"Custom.\" \nYou walk through the doors and find... \nc - continue \n" + ourHero.getName() + ": ");
+            input = inScanner.nextLine();
+            if(input.equals("c")){
+              console.setImage("goldentreasure.jpg");
+              System.out.println("Gold? \nYou have passed the temple's protectors and are rewarded with a golden trasure... you win!");
+              gameEnd();
+            }
+          }
+         }else{
+          System.out.println("\"Well then... goodbye.\" \nYou hear a scream and the room turns black...");
+          console.setImage("grimreaper.jpg");
+         }
+      }
+    }
   }
 
   private void enterZone14()
@@ -408,10 +501,14 @@ public class TextAdventure
     // describe the area/situation to the user. 
     // Give them options for choices.
     // ADD CODE HERE
-
+    System.out.println("You turn left to fall into a crumbling hole. \nIn the hole lies a monster built from steel and shadows. \nThe room is filled with smoke, dust, and the darkness leaking from the monster's body. \nWhat do you do? \nattack - fight the monster since there's no escape \n" + ourHero.getName() + ": ");
+    String input = inScanner.nextLine();
     // Take action or go to another zone based on their choice
     // ADD CODE HERE
-    
+    if(input.equals("fight")){
+      System.out.println("You attempt to attack the monster but it throws you against the crumbling wall. \nYou slash and strike it as much as you can but the shadows begin to surround you. \nSlowly, the darkness consumes you as you fight blindly. \nThe monster charges at you over and over again as you stay helpless. \nYou never stood a chance.");
+      console.setImage("grimreaper.jpg");
+    }
   }
 
   private void enterZone15()
@@ -427,97 +524,46 @@ public class TextAdventure
     // Take action or go to another zone based on their choice
     // ADD CODE HERE
     if(input.equals("attack")){
-      System.out.println("You swim furiously over to the dragon and climb up its slimey scales with the whip in hand. \nYou desperately run and slash at its scales while maintaining your balance. \nThe dragon merely flicks you off and back into the water. \n Your health is now " + ourHero.getHealth() + "\nHow do you approach it?");
       ourHero.setHealth(70);
+      System.out.println("You swim furiously over to the dragon and climb up its slimey scales with the whip in hand. \nYou desperately run and slash at its scales while maintaining your balance. \nThe dragon merely flicks you off and back into the water. \n Your health is now " + ourHero.getHealth() + "\nHow do you approach it?");
       System.out.println("water - stay in the water \nfight - attack the dragon \n" + ourHero.getName() + ": ");
       input = inScanner.nextLine();
       if(input.equals("water")){
         System.out.println("You try to stay afloat in the water when you spot something floating nearby. \nYou swim towards it and find a ring. \nThe dragon roars at you and you quickly put it on in hope of a miracle. \nYou feel a surge of power through your body and wiggle your fingers and toes with the sensation. \nYou charge forth towards the dragon, the ocean at your command and slash at it.");
-        System.out.println("It growls as damage is done to its scales and attempts to smack you down. \nThe overflowing power in your veins twists its movememts and knocks it over with a wave of the water. \nThe struggle continues but you're finally able to hit it in its weak spot... its mouth. \nThe dragon fades, the sea calms down, and the storm moves away. \nAs the dragon fades its power remains and sinks into the sea. \nYou dive into the sea and attempt to collect it. \nc - continue");
+        System.out.println("It growls as damage is done to its scales and attempts to smack you down. \nThe overflowing power in your veins twists its movememts and knocks it over with a wave of the water. \nThe struggle continues but you're finally able to hit it in its weak spot... its mouth. \nThe dragon fades, the sea calms down, and the storm moves away. \nAs the dragon fades its power remains and sinks into the sea. \nYou dive into the sea and attempt to collect it. \nc - continue \n" + ourHero.getName() + ": ");
         input = inScanner.nextLine();
         if(input.equals("c")){
           console.setImage("seatemple.jpg");
-          System.out.println("You chase the flying power through the water and find an underwater temple. \nYou swim into it, following the light. \nc - continue");
+          System.out.println("You chase the flying power through the water and find an underwater temple. \nYou swim into it, following the light. \nc - continue \n" + ourHero.getName() + ": ");
           input = inScanner.nextLine();
           if(input.equals("c")){
             console.setImage("oceantreasure.jpg");
+            System.out.println("You lose sight of it and swim through and around the temple in search of it and spot a chest. \nFour keys appear in front of you. One silver. One gold. One bronze. One copper. \nWhich key will you choose. \n1 - silver \n2 - gold \n3 - bronze \n4 - copper" + ourHero.getName() + ": ");
+            int input1 = inScanner.nextInt();
+            if(input1 != 1){
+              System.out.println("You have chosen the wrong key... \nYou do not obtain ultimate power... \nGood game");
+              console.setImage("seatemple.jpg");
+              gameEnd();
+            }else{
+              console.setImage("ultimatepower.webp");
+              ourHero.setGold(100);
+              ourHero.defeatMonster();
+              System.out.println("You open the treasure to find the dragon's remaining power along with several gold coins. \nThe dragon's power has given you ultimate power... \nYou've lived successfully, collecting " + ourHero.getGold() + " gold coins and defeating the ancient sea dragon...");
+              gameEnd();
+            }
+          }
         }
+      }else{
+        System.out.println("You whip and stab at the dragon but there's no use. \nNone of your attacks can get past its scales. \nThe dragon eventually sinks you with its fangs... you drown in the sea of monsters...");
+        console.setImage("drowning.jpg");
+        gameEnd();
       }
     }
   }
 
-  private void enterZone16()
-  {
-    // change image
-    // ADD CODE HERE
-    // describe the area/situation to the user. 
-    // Give them options for choices.
-    // ADD CODE HERE
-
-    // Take action or go to another zone based on their choice
-    // ADD CODE HERE
-    
-  }
-
-  private void enterZone17()
-  {
-    // change image
-    // ADD CODE HERE
-
-    // describe the area/situation to the user. 
-    // Give them options for choices.
-    // ADD CODE HERE
-
-    // Take action or go to another zone based on their choice
-    // ADD CODE HERE
-    
-  }
-
-  private void enterZone18()
-  {
-    // change image
-    // ADD CODE HERE
-
-    // describe the area/situation to the user. 
-    // Give them options for choices.
-    // ADD CODE HERE
-
-    // Take action or go to another zone based on their choice
-    // ADD CODE HERE
-    
-  }
-
-  private void enterZone19()
-  {
-    // change image
-    // ADD CODE HERE
-
-    // describe the area/situation to the user. 
-    // Give them options for choices.
-    // ADD CODE HERE
-
-    // Take action or go to another zone based on their choice
-    // ADD CODE HERE
-    
-  }
-
-  private void enterZone20()
-  {
-    // change image
-    // ADD CODE HERE
-
-    // describe the area/situation to the user. 
-    // Give them options for choices.
-    // ADD CODE HERE
-
-    // Take action or go to another zone based on their choice
-    // ADD CODE HERE
-    
-  }
-
   private void gameEnd()
   {
-    // ADD CODE HERE
+    System.out.println("You have ended the game with " + ourHero.getGold() + " coins and " + ourHero.getMonstersDefeated() +  " monsters defeated. \nHope you liked your adventure!");
 
     inScanner.close();
   }

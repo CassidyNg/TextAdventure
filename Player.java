@@ -4,11 +4,11 @@ public class Player
 {
   String name;
   int health;
-  double gold;
+  int gold;
   int monstersDefeated;
   String weapon;
 
-  public Player(String playerName, int startingHealth, double startingGold)
+  public Player(String playerName, int startingHealth, int startingGold)
   {
     name = playerName;
     health = startingHealth;
@@ -40,7 +40,7 @@ public class Player
     return gold;
   }
 
-  public void setGold(double newAmount)
+  public void setGold(int newAmount)
   {
     gold += newAmount;
   }
