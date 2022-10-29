@@ -175,7 +175,7 @@ public class TextAdventure
           }
         }
       }else{
-        System.out.println("You run an hide behind one of the buildings in fear of the dragon. \nIt begins to stomp and destroy the temple, leaving no remaining pieces. \nStil hiding you hope that the dragon doesn't discover you. \nBut the crumbling of the buildings and the mountain interrupt your thoughts as they fall above you... \nLooks like you'll never face the dragon.");
+        System.out.println("You run an hide behind one of the buildings in fear of the dragon. \nIt begins to stomp and destroy the temple, leaving no remaining pieces. \nStill hiding you hope that the dragon doesn't discover you. \nBut the crumbling of the buildings and the mountain interrupt your thoughts as they fall above you... \nLooks like you'll never face the dragon.");
         console.setImage("flyingdragon.jpg");
         gameEnd();
       }
@@ -466,7 +466,7 @@ public class TextAdventure
       input = inScanner.nextLine();
       if(input.equals("c")){
          console.setImage("deathgamble.jpg");
-         System.out.println("You rub your head and look around you in a panic. \nBefore you stands a mysterious person in a dark cloak who radiates a skin crawling energy. \n\"You have committed a grave sin, stealing a sacred object? How shameful...\" \nYou stand up quietly staring at the person. \n\"You're lucky... today is not a day for death. But if you cannot guess the symbolic number of our temple. You die.\" \nSymbolic number? You're confused by the question and are not sure what to think. \nThe figure asks you if you accept their offer for survival. \nAccept it? \nyes - accept \nno - dont' accept and die \n" + ourHero.getName() + ": ");
+         System.out.println("You rub your head and look around you in a panic. \nBefore you stands a mysterious person in a dark cloak who radiates a skin crawling energy. \n\"You have committed a grave sin, stealing a sacred object? How shameful...\" \nYou stand up quietly staring at the person. \n\"You're lucky... today is not a day for death. But if you cannot guess the symbolic number of our temple. You die.\" \nSymbolic number? You're confused by the question and are not sure what to think. \nThe figure asks you if you accept their offer for survival. \nAccept it? \nyes - accept \nno - don't accept and die \n" + ourHero.getName() + ": ");
          input = inScanner.nextLine();
          if(input.equals("yes")){
           int symbolicNumber = (int)(Math.random() * 26);
